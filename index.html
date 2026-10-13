@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TestFlow — Online test platformasi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-shapes" aria-hidden="true"><span class="shape s1"></span><span class="shape s2"></span><span class="shape s3"></span></div>
+
+<header class="topbar" id="mainHeader">
+  <a class="brand" href="#" data-action="home">
+    <span class="brand-mark"><i data-lucide="layers"></i></span>
+    <span class="brand-name">TestFlow</span>
+  </a>
+  <nav class="nav">
+    <a href="#" data-action="home" class="nav-link active">Bosh sahifa</a>
+    <a href="#about" data-action="about" class="nav-link">Test haqida</a>
+  </nav>
+  <div class="topbar-actions">
+    <button class="icon-btn" id="themeToggle" type="button" aria-label="Mavzuni almashtirish"><i data-lucide="moon"></i></button>
+    <button class="btn btn-primary btn-sm" id="headerUpload" type="button"><i data-lucide="upload"></i><span>Fayl yuklash</span></button>
+  </div>
+</header>
+
+<header class="topbar quiz-topbar hidden" id="quizHeader">
+  <a class="brand" href="#" id="quizBrand">
+    <span class="brand-mark"><i data-lucide="layers"></i></span>
+    <span class="brand-name">TestFlow</span>
+  </a>
+  <div class="quiz-title">Test jarayoni</div>
+  <div class="quiz-counter" id="quizCounter">Savol 1 / 25</div>
+  <button class="btn btn-ghost btn-sm" id="quitBtn" type="button"><i data-lucide="log-out"></i><span>Chiqish</span></button>
+</header>
+
+<main>
+  <section class="view" id="view-upload">
+    <div class="hero">
+      <span class="eyebrow reveal"><i data-lucide="sparkles"></i> Interaktiv test platformasi</span>
+      <h1 class="reveal">Bilimingizni sinab ko‘ring</h1>
+      <p class="hero-sub reveal">Test faylingizni yuklang va bir necha soniyada interaktiv testga aylantiring.</p>
+    </div>
+
+    <div class="upload-wrap reveal">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Fayl yuklash">
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv,.docx,.txt" hidden>
+        <div class="dz-icon"><i data-lucide="cloud-upload"></i></div>
+        <h3>Faylni shu yerga tashlang</h3>
+        <p>yoki kompyuteringizdan tanlang</p>
+        <button class="btn btn-primary" id="pickBtn" type="button"><i data-lucide="folder-open"></i><span>Fayl tanlash</span></button>
+        <div class="formats"><span>.xlsx</span><span>.xls</span><span>.csv</span><span>.docx</span><span>.txt</span></div>
+        <div class="dz-hint">Maksimal hajm: 10 MB</div>
+      </div>
+
+      <div class="file-panel hidden" id="filePanel">
+        <div class="file-head">
+          <div class="file-badge" id="fileBadge"><i data-lucide="file-spreadsheet"></i></div>
+          <div class="file-meta">
+            <div class="file-name" id="fileName"></div>
+            <div class="file-sub" id="fileSub"></div>
+          </div>
+          <button class="icon-btn" id="clearFile" type="button" aria-label="Faylni olib tashlash"><i data-lucide="x"></i></button>
+        </div>
+        <div class="progress-track hidden" id="loadTrack"><div class="progress-fill" id="loadFill"></div></div>
+        <div class="status hidden" id="statusBox"></div>
+        <div class="summary hidden" id="summaryBox">
+          <div class="success-mark"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="none"/><path d="M14 27l8 8 16-17" fill="none"/></svg></div>
+          <div class="summary-text">
+            <div class="summary-count"><span id="foundCount">0</span> ta savol topildi</div>
+            <div class="summary-note" id="summaryNote"></div>
+          </div>
+        </div>
+        <div class="preview hidden" id="previewBox">
+          <div class="preview-title">Savollar preview</div>
+          <div id="previewList"></div>
+        </div>
+        <div class="file-actions">
+          <button class="btn btn-primary btn-lg" id="startBtn" type="button" disabled><i data-lucide="play"></i><span>Testni boshlash</span></button>
+        </div>
+      </div>
+    </div>
+
+    <section class="about" id="about">
+      <h2>Test haqida</h2>
+      <p class="about-sub">Fayl quyidagi tartibda tayyorlanishi kerak. Har bir qator — bitta savol.</p>
+      <div class="table-scroll">
+        <table class="about-table">
+          <thead><tr><th>1-ustun</th><th>2-ustun</th><th>3-ustun</th><th>4-ustun</th><th>5-ustun</th></tr></thead>
+          <tbody><tr><td>Savol</td><td>To‘g‘ri javob</td><td>Xato javob</td><td>Xato javob</td><td>Xato javob</td></tr></tbody>
+        </table>
+      </div>
+      <div class="feature-grid">
+        <div class="feature"><i data-lucide="shuffle"></i><h4>Tasodifiy tartib</h4><p>Savollar va variantlar test boshida bir marta aralashtiriladi.</p></div>
+        <div class="feature"><i data-lucide="zap"></i><h4>Darhol feedback</h4><p>Javob tanlangan zahoti to‘g‘ri yoki noto‘g‘riligi ko‘rsatiladi.</p></div>
+        <div class="feature"><i data-lucide="timer-off"></i><h4>Vaqt chegarasisiz</h4><p>Timer yo‘q — testni xohlagan vaqtda tugatishingiz mumkin.</p></div>
+        <div class="feature"><i data-lucide="repeat"></i><h4>Qayta boshlash</h4><p>Faylni qayta yuklamasdan testni yangidan boshlang.</p></div>
+      </div>
+    </section>
+  </section>
+
+  <section class="view hidden" id="view-settings">
+    <div class="settings-wrap">
+      <button class="btn btn-ghost btn-sm back-btn" id="settingsBack" type="button"><i data-lucide="arrow-left"></i><span>Orqaga</span></button>
+      <h2>Test sozlamalari</h2>
+      <p class="about-sub">Nechta savol yechmoqchisiz? Savollar fayldan tasodifiy tanlanadi.</p>
+      <div class="available" id="availableInfo"></div>
+      <div class="count-grid" id="countGrid"></div>
+      <div class="settings-note"><i data-lucide="info"></i><span>Vaqt chegarasi yo‘q. Testni istalgan paytda tugatishingiz mumkin.</span></div>
+      <button class="btn btn-primary btn-lg" id="beginBtn" type="button" disabled><i data-lucide="rocket"></i><span>Testni boshlash</span></button>
+    </div>
+  </section>
+
+  <section class="view hidden" id="view-quiz">
+    <div class="quiz-layout">
+      <div class="quiz-main">
+        <div class="progress-block">
+          <div class="progress-labels"><span id="progressLabel">Javob berilgan: 0 / 25</span><span id="progressPct">0%</span></div>
+          <div class="progress-track"><div class="progress-fill" id="quizFill"></div></div>
+        </div>
+        <article class="q-card" id="qCard">
+          <div class="q-number" id="qNumber">Savol 1</div>
+          <h2 class="q-text" id="qText"></h2>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback" aria-live="polite"></div>
+          <div class="q-nav">
+            <button class="btn btn-ghost" id="prevBtn" type="button"><i data-lucide="arrow-left"></i><span>Oldingi savol</span></button>
+            <button class="btn btn-primary" id="nextBtn" type="button"><span>Keyingi savol</span><i data-lucide="arrow-right"></i></button>
+            <button class="btn btn-success hidden" id="finishBtn" type="button"><i data-lucide="flag"></i><span>Testni yakunlash</span></button>
+          </div>
+        </article>
+      </div>
+      <aside class="q-side">
+        <div class="side-title">Savollar</div>
+        <div class="nav-grid" id="navGrid"></div>
+        <div class="legend">
+          <span><i class="dot dot-ok"></i>To‘g‘ri</span>
+          <span><i class="dot dot-bad"></i>Noto‘g‘ri</span>
+          <span><i class="dot dot-idle"></i>Javobsiz</span>
+        </div>
+        <button class="btn btn-outline btn-block" id="endNowBtn" type="button"><i data-lucide="square"></i><span>Testni tugatish</span></button>
+      </aside>
+    </div>
+  </section>
+
+  <section class="view hidden" id="view-results">
+    <div class="results-wrap">
+      <h2 class="center">Test natijalari</h2>
+      <div class="score-card">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 160 160">
+            <circle class="ring-bg" cx="80" cy="80" r="70"/>
+            <circle class="ring-fg" id="ringFg" cx="80" cy="80" r="70"/>
+          </svg>
+          <div class="ring-text"><span id="scorePct">0</span><small>%</small></div>
+        </div>
+        <div class="score-info">
+          <div class="score-big"><span id="scorePoints">0</span> / <span id="scoreTotal">0</span> ball</div>
+          <p class="score-msg" id="scoreMsg"></p>
+          <p class="score-rule">Foiz eng yaqin butun songa yaxlitlanadi. Har bir savol — 1 ball.</p>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><i data-lucide="list-checks"></i><b id="stTotal">0</b><span>Jami savollar</span></div>
+        <div class="stat stat-ok"><i data-lucide="circle-check"></i><b id="stCorrect">0</b><span>To‘g‘ri</span></div>
+        <div class="stat stat-bad"><i data-lucide="circle-x"></i><b id="stWrong">0</b><span>Noto‘g‘ri</span></div>
+        <div class="stat stat-skip"><i data-lucide="circle-help"></i><b id="stSkipped">0</b><span>Javobsiz</span></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="reviewBtn" type="button"><i data-lucide="eye"></i><span>Javoblarni ko‘rish</span></button>
+        <button class="btn btn-outline" id="restartBtn" type="button"><i data-lucide="rotate-ccw"></i><span>Qayta boshlash</span></button>
+        <button class="btn btn-ghost" id="homeBtn" type="button"><i data-lucide="house"></i><span>Bosh sahifaga qaytish</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="view hidden" id="view-review">
+    <div class="review-wrap">
+      <div class="review-head">
+        <button class="btn btn-ghost btn-sm" id="reviewBack" type="button"><i data-lucide="arrow-left"></i><span>Natijalarga qaytish</span></button>
+        <h2>Javoblarni ko‘rib chiqish</h2>
+      </div>
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </section>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<div class="modal-backdrop hidden" id="modal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h3 id="modalTitle"></h3>
+    <p id="modalText"></p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="modalCancel" type="button">Bekor qilish</button>
+      <button class="btn btn-primary" id="modalOk" type="button">Tasdiqlash</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="js/parser.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
